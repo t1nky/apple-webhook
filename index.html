@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apple Server Notification Decoder</title>
+    <meta
+      name="description"
+      content="Decode and verify Apple App Store server notifications"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="apple, app store, server notification" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Apple Server Notification Decoder</h1>
+      </header>
+
+      <main>
+        <div class="input-section">
+          <div class="form-group">
+            <label for="signedPayload">Signed Payload (JWT Token):</label>
+            <textarea
+              id="signedPayload"
+              placeholder="Enter the signed payload from Apple server notification..."
+              rows="6"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="appleRootCert"
+              >Apple Root Certificate (PEM format):</label
+            >
+            <textarea
+              id="appleRootCert"
+              placeholder="-----BEGIN CERTIFICATE-----&#10;...&#10;-----END CERTIFICATE-----"
+              rows="8"
+            ></textarea>
+            <small>You can download this from Apple's developer portal</small>
+          </div>
+
+          <button id="decodeBtn" class="decode-btn">
+            🔍 Decode Notification
+          </button>
+        </div>
+
+        <div class="output-section">
+          <h2>Decoded Information</h2>
+
+          <div class="status-indicators">
+            <div id="validStatus" class="status-indicator">
+              <span class="status-label">Valid:</span>
+              <span class="status-value" id="isValid">-</span>
+            </div>
+            <div id="testStatus" class="status-indicator">
+              <span class="status-label">Test:</span>
+              <span class="status-value" id="isTest">-</span>
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="payload">
+              Notification Payload
+            </button>
+            <button class="tab-btn" data-tab="transaction">
+              Transaction Info
+            </button>
+            <button class="tab-btn" data-tab="renewal">Renewal Info</button>
+            <button class="tab-btn" data-tab="raw">Raw Data</button>
+          </div>
+
+          <div class="tab-content">
+            <div id="payload-tab" class="tab-pane active">
+              <h3>Notification Payload</h3>
+              <div class="json-output" id="payloadOutput">
+                <p class="placeholder">Decoded payload will appear here...</p>
+              </div>
+            </div>
+
+            <div id="transaction-tab" class="tab-pane">
+              <h3>Transaction Information</h3>
+              <div class="json-output" id="transactionOutput">
+                <p class="placeholder">Transaction info will appear here...</p>
+              </div>
+            </div>
+
+            <div id="renewal-tab" class="tab-pane">
+              <h3>Renewal Information</h3>
+              <div class="json-output" id="renewalOutput">
+                <p class="placeholder">Renewal info will appear here...</p>
+              </div>
+            </div>
+
+            <div id="raw-tab" class="tab-pane">
+              <h3>Raw Decoded Data</h3>
+              <div class="json-output" id="rawOutput">
+                <p class="placeholder">Raw decoded data will appear here...</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="errorOutput" class="error-output" style="display: none">
+            <h3>❌ Error</h3>
+            <p id="errorMessage"></p>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          Built for decoding Apple App Store server notifications •
+          <a
+            href="https://developer.apple.com/documentation/appstoreservernotifications"
+            target="_blank"
+            >Apple Documentation</a
+          >
+        </p>
+        <div class="disclaimer">
+          <small
+            >⚠️ This tool is not affiliated with, endorsed by, or sponsored by
+            Apple Inc. in any way.</small
+          >
+        </div>
+      </footer>
+    </div>
+
+    <script src="decoder.js"></script>
+  </body>
+</html>
